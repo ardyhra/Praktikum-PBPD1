@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form Tambah Data Produk</title> 
+    </head>
+    <body>
+        <h2>Form Tambah Data Produk</h2>
+        <form id="formTambahProduk" name="formTambahProduk" action="process.php" method="post">
+        <table>
+            <tr>
+                <td>Nama Produk </td>
+                <td><input type="text" id="fnama" name="fnama" required="required" minlength="5" maxlength="30" /></td>
+            </tr>
+            <tr>
+                <td>Deskripsi </td>
+                <td><textarea id="fdeskripsi" name="fdeskripsi" required="required" rows="4" cols="30" minlength="5" maxlength="100"></textarea></td>
+            </tr>
+            <tr>
+                <td>Kategori </td>
+                <td>
+                    <select id="fkategori" name="fkategori" required="required">
+                    <option value="">--Pilih Kategori--</option>
+                    <option value="Baju">Baju</option>
+                    <option value="Elektronik">Elektronik</option>
+                    <option value="Alat Tulis">Alat Tulis</option>
+                    </select>
+                </td>
+                
+            </tr>
+            <tr>
+                <td>Sub Kategori </td>
+                <td><select id="fsubkategori" name="fsubkategori">
+                    <option value="">--Pilih Sub Kategori--</option>
+
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Harga Satuan </td>
+                <td><input type="text" id ="fhargas" name="fhargas" required="required" /></td>
+            </tr>
+            <tr>
+                <td>Grosir </td>
+                <td>
+                    <input type="radio" id="grosir-ya" name="grosir" value="ya">
+                    <label for="grosir-ya">Ya</label>
+                    <br>
+                    <input type="radio" id="grosir-tidak" name="grosir" value="tidak">
+                    <label for="grosir-tidak">Tidak</label><br><br>
+                </td>
+            </tr>
+            <tr>
+                <td>Harga Grosir </td>
+                <td><input type="text" id="fhargag" name="fhargag" required="required" /></td>
+            </tr>
+            <tr>
+                <td>Jasa Kirim </td>
+                <td>
+                    <input type="checkbox" id="jne" name="jasa-kirim" value="JNE">
+                    <label for="jne">JNE</label>
+                    <br>
+                    <input type="checkbox" id="tiki" name="jasa-kirim" value="TIKI">
+                    <label for="tiki">TIKI</label>
+                    <br>
+                    <input type="checkbox" id="sicepat" name="jasa-kirim" value="SiCepat">
+                    <label for="sicepat">SiCepat</label>
+                    <br>
+                    <input type="checkbox" id="ninja" name="jasa-kirim" value="Ninja Express">
+                    <label for="ninja">Ninja Express</label>
+                    <br>
+                    <input type="checkbox" id="wahana" name="jasa-kirim" value="Wahana">
+                    <label for="wahana">Wahana</label>
+                </td>
+            </tr>
+            <tr>
+                <td>Captcha</td>
+                <td>
+                    <input type="text" id="captcha" name="captcha" value="ebgih" required readonly disabled>
+                    <input type="text" id="captcha" name="captcha" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Reset">
+                </td>
+            </tr>
+            
+        
+        </table>
+        </form>
+        <script src="form.js"></script>
+    </body>
+</html>
