@@ -1,3 +1,10 @@
+<!-- 
+Nama : Ardy Hasan Rona Akhmad
+NIM : 24060122130053
+Lab : PBP D1
+Tugas Praktikum 1 
+-->
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,16 +16,16 @@
         <table>
             <tr>
                 <td>Nama Produk </td>
-                <td><input type="text" id="fnama" name="fnama" required="required" minlength="5" maxlength="30" /></td>
+                <td><input type="text" id="fnama" name="fnama" size="29"  /></td>
             </tr>
             <tr>
                 <td>Deskripsi </td>
-                <td><textarea id="fdeskripsi" name="fdeskripsi" required="required" rows="4" cols="30" minlength="5" maxlength="100"></textarea></td>
+                <td><textarea id="fdeskripsi" name="fdeskripsi" rows="5" cols="30" ></textarea></td>
             </tr>
             <tr>
                 <td>Kategori </td>
                 <td>
-                    <select id="fkategori" name="fkategori" required="required">
+                    <select id="fkategori" name="fkategori" >
                     <option value="">--Pilih Kategori--</option>
                     <option value="Baju">Baju</option>
                     <option value="Elektronik">Elektronik</option>
@@ -37,7 +44,7 @@
             </tr>
             <tr>
                 <td>Harga Satuan </td>
-                <td><input type="text" id ="fhargas" name="fhargas" required="required" /></td>
+                <td><input type="text" id ="fhargas" name="fhargas" size="10" /></td>
             </tr>
             <tr>
                 <td>Grosir </td>
@@ -51,7 +58,7 @@
             </tr>
             <tr>
                 <td>Harga Grosir </td>
-                <td><input type="text" id="fhargag" name="fhargag" required="required" /></td>
+                <td><input type="text" id="fhargag" name="fhargag" size="10"/></td>
             </tr>
             <tr>
                 <td>Jasa Kirim </td>
@@ -75,8 +82,8 @@
             <tr>
                 <td>Captcha</td>
                 <td>
-                    <input type="text" id="captcha" name="captcha" value="ebgih" required readonly disabled>
-                    <input type="text" id="captcha" name="captcha" required>
+                    <input type="text" id="captcha" name="captcha" value="ebgih" size="10" disabled>
+                    <input type="text" id="captcha" name="captcha" size="10" >
                 </td>
             </tr>
             <tr>
@@ -90,6 +97,121 @@
         
         </table>
         </form>
-        <script src="form.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const form = document.getElementById('formTambahProduk');
+                const kategori = document.getElementById('fkategori');
+                const subKategori = document.getElementById('fsubkategori');
+                const grosirYa = document.getElementById('grosir-ya');
+                const grosirTidak = document.getElementById('grosir-tidak');
+                const hargaGrosir = document.getElementById('fhargag');
+                const captcha = document.getElementById('captcha');
+        
+                const subKategoriOptions = {
+                    Baju: ['Baju Pria', 'Baju Wanita', 'Baju Anak'],
+                    Elektronik: ['Mesin Cuci', 'Kulkas', 'AC'],
+                    'Alat Tulis': ['Kertas', 'Map', 'Pulpen']
+                };
+    
+                function generateCaptcha() {
+                    let captchaText = '';
+                    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+                    for (let i = 0; i < 5; i++) {
+                        captchaText += characters.charAt(Math.floor(Math.random() * characters.length));
+                    }
+                    captcha.value = captchaText;
+                }
+    
+                kategori.addEventListener('change', function() {
+                    const selectedKategori = kategori.value;
+                    const options = subKategoriOptions[selectedKategori] || [];
+                    
+                    subKategori.innerHTML = '<option value="">--Pilih Sub Kategori--</option>';
+                    options.forEach(function(option) {
+                        const opt = document.createElement('option');
+                        opt.value = option;
+                        opt.textContent = option;
+                        subKategori.appendChild(opt);
+                    });
+                });
+    
+                grosirYa.addEventListener('change', function() {
+                    if (grosirYa.checked) {
+                        hargaGrosir.disabled = false;
+                    }
+                });
+    
+                grosirTidak.addEventListener('change', function() {
+                    if (grosirTidak.checked) {
+                        hargaGrosir.value = '';
+                        hargaGrosir.disabled = true;
+                    }
+                });
+    
+                form.addEventListener('submit', function(event) {
+                    let valid = true;
+        
+                    // Validasi Nama Produk
+                    const namaProduk = document.getElementById('fnama').value;
+                    if (namaProduk.length < 5 || namaProduk.length > 30) {
+                        valid = false;
+                        alert("Nama produk harus diisi, minimal 5 karakter, maksimal 30 karakter");
+                    }
+        
+                    // Validasi Deskripsi
+                    const deskripsi = document.getElementById('fdeskripsi').value;
+                    if (deskripsi.length < 5 || deskripsi.length > 100) {
+                        valid = false;
+                        alert("Deskripsi harus diisi, minimal 5 karakter, maksimal 100 karakter");
+                    }
+        
+                    // Validasi Kategori
+                    if (kategori.value === "") {
+                        valid = false;
+                        alert("Kategori harus dipilih");
+                    }
+        
+                    // Validasi Sub Kategori
+                    if (subKategori.value === "") {
+                        valid = false;
+                        alert("Sub kategori harus dipilih");
+                    }
+        
+                    // Validasi Harga Satuan
+                    const hargaSatuan = document.getElementById('fhargas').value;
+                    if (hargaSatuan === "" || isNaN(hargaSatuan)) {
+                        valid = false;
+                        alert("Harga satuan harus diisi dan berupa nilai numerik");
+                    }
+        
+                    // Validasi Harga Grosir
+                    if (grosirYa.checked && (hargaGrosir.value === "" || isNaN(hargaGrosir.value))) {
+                        valid = false;
+                        alert("Harga grosir harus diisi jika Grosir adalah Ya dan berupa nilai numerik");
+                    }
+        
+                    // Validasi Jasa Kirim
+                    const jasaKirim = document.querySelectorAll('input[name="jasa-kirim"]:checked');
+                    if (jasaKirim.length < 3) {
+                        valid = false;
+                        alert("Minimal 3 jasa kirim harus dipilih");
+                    }
+        
+                    // Validasi Captcha
+                    const captchaInput = document.querySelector('input[name="captcha"]:not([disabled])').value;
+                    if (captchaInput.length !== 5 || !/^[A-Za-z]+$/.test(captchaInput)) {
+                        valid = false;
+                        alert("Captcha salah. Captcha harus berisi 5 huruf dari A-Z atau a-z");
+                    }
+        
+                    if (!valid) {
+                        event.preventDefault();
+                    }
+                });
+        
+                // Generate Captcha on page load
+                generateCaptcha();
+            });
+        </script>
     </body>
 </html>
